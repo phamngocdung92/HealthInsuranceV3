@@ -39,6 +39,7 @@ namespace HealthInsuranceV3.Areas.User.Controllers
         public IActionResult ApproveInsurance(int RegistrationId, string EmployeeId)
         {
             _ForManagerService.ApproveInsurance(RegistrationId, EmployeeId);
+            TempData["SuccessMessage"] = "Approval Success!";
             return RedirectToAction("CheckEmpInsurance", new { Id = EmployeeId });
         }
         public IActionResult SelectReason(string EmployeeId, int RegistrationId)
@@ -60,6 +61,49 @@ namespace HealthInsuranceV3.Areas.User.Controllers
             _ForManagerService.RejectInsuranceRegistration(RegistrationId, EmployeeId, RejectionReasonId);
             return RedirectToAction("RejectInsuranceRegistration", new { Id = EmployeeId });
         }
-        
+        public IActionResult ForHR()
+        {
+            var Id = _userManager.GetUserId(User);
+            bool IsManager = _ForManagerService.IsUserManager(Id);
+
+            // Fetch additional data needed for the DepartmentAndManager model
+            var dataDepartment = _ForManagerService.GetDepartments();
+            var dataManager = _ForManagerService.GetManagers();
+
+            // Create an instance of DepartmentAndManager and set its properties
+            var viewModel = new DepartmentAndManager
+            {
+                Data = _ForManagerService.GetNewEmp(Id, IsManager),
+                dataDepartment = dataDepartment,
+                dataManager = dataManager
+            };
+
+            return View(viewModel);
+        }
+
+        //public IActionResult SelectDepartAndManager()
+        //{
+        //    var Id = _userManager.GetUserId(User);
+        //    bool IsManager = _ForManagerService.IsUserManager(Id);
+        //    var dataDepartment = _ForManagerService.GetDepartments();
+        //    var dataManager = _ForManagerService.GetManagers();
+        //    var data = _ForManagerService.GetNewEmp(Id, IsManager);
+        //    var viewModel = new DepartmentAndManager
+        //    {
+        //        Data = data,
+        //        dataDepartment = dataDepartment,
+        //        dataManager = dataManager
+        //    };
+
+        //    return View(viewModel);
+        //}
+
+        public IActionResult UpdateEmployeeDepartment(string Id, string EmployeeId, int ManagerId, int DepartmentId, bool IsManager)
+        {
+            
+            //var data = _ForManagerService.GetNewEmp(Id, IsManager);
+            _ForManagerService.UpdateEmployeeDepartment(Id, EmployeeId, ManagerId, DepartmentId);
+            return RedirectToAction("ForHR");
+        }
     }
 }

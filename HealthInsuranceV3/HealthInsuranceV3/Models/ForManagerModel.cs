@@ -21,6 +21,9 @@
         public int? RejectionReasonId { get; set; }
         public string ReasonText { get; set; } = null!;
         public int ReasonId { get; set; }
+        public int? DepartmentId { get; set; }
+        public string? ManagerId { get; set; }
+        public bool IsManager { get; set; }
 
     }
 }

@@ -72,12 +72,14 @@
                                 </div>
                             <h4 class="mb-3">PackageName: @firstItem.PackageName</h4>
                             <p class="mb-4">Registration Date: @firstItem.RegistrationDate</p>
-                                <select>
+                            <div class="mb-3">
+                            <select class="form-select border-0" >
                                     @foreach (var reason in Model.Data)
                                     {
                                         <option value="@reason.RejectionReasonId">@reason.ReasonText</option>
                                     }
                                 </select>
+                            </div>
                                 <button class="btn btn-primary w-100 py-3">
                                 <a href="@Url.Action("RejectInsuranceRegistration", "ForManager", new {area = "User", RegistrationId = firstItem.RegistrationId, EmployeeId = firstItem.EmployeeId, RejectionReasonId = firstItem.RejectionReasonId })"><i class="fas fa-thumbs-up text-primary me-3"></i>Reject Registration</a>
                                 </button>

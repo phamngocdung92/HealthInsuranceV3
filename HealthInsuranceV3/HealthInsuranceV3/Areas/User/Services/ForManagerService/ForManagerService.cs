@@ -40,5 +40,21 @@ namespace HealthInsuranceV3.Areas.User.Services.ForManagerService
         { 
             _ForManagerRepository.RejectInsuranceRegistration(RegistrationId, EmployeeId, RejectionReasonId);
         }
+        public IEnumerable<ForManagerModel> GetNewEmp(string Id, bool IsManager)
+        {
+            return _ForManagerRepository.GetNewEmp(Id, IsManager);
+        }
+        public void UpdateEmployeeDepartment(string Id, string EmployeeId, int ManagerId, int DepartmentId)
+        {
+            _ForManagerRepository.UpdateEmployeeDepartment(Id, EmployeeId, ManagerId, DepartmentId);
+        }
+        public IEnumerable<ForManagerModel> GetDepartments()
+        {
+            return _ForManagerRepository.GetDepartments();
+        }
+        public IEnumerable<ForManagerModel> GetManagers()
+        {
+            return _ForManagerRepository.GetManagers();
+        }
     }
 }

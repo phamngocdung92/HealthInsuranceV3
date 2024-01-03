@@ -9,5 +9,9 @@ namespace HealthInsuranceV3.Areas.User.Repositories.ForManagerRepository
         void ApproveInsurance(int RegistrationId, string EmployeeId);
         IEnumerable<ForManagerModel> GetRejectionReasons();
         void RejectInsuranceRegistration(int RegistrationId, string EmployeeId, int RejectionReasonId);
+        IEnumerable<ForManagerModel> GetNewEmp(string Id, bool IsManager);
+        void UpdateEmployeeDepartment(string Id, string EmployeeId, int ManagerId, int DepartmentId);
+        IEnumerable<ForManagerModel> GetDepartments();
+        IEnumerable<ForManagerModel> GetManagers();
     }
 }

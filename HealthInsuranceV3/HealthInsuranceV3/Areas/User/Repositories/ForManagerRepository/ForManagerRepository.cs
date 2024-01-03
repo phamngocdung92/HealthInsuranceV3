@@ -186,5 +186,142 @@ namespace HealthInsuranceV3.Areas.User.Repositories.ForManagerRepository
                 }
             }
         }
+
+        public IEnumerable<ForManagerModel> GetNewEmp(string Id, bool IsManager)
+        {
+            List<ForManagerModel> EmployeeList = new List<ForManagerModel>();
+
+            using (SqlConnection connection = new SqlConnection(_context.Database.GetConnectionString()))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("GetNewEmp", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    // Pass the EmployeeID as a parameter
+                    command.Parameters.AddWithValue("@Id", Id);
+                    command.Parameters.AddWithValue("@IsManager", IsManager);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ForManagerModel employeeList = new ForManagerModel
+                            {
+                                Id = reader.GetString(reader.GetOrdinal("Id")),
+                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                                LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                                Email = reader.GetString(reader.GetOrdinal("Email")),
+                                PhoneNumber = reader.IsDBNull(reader.GetOrdinal("PhoneNumber")) ? (string?)null : reader.GetString(reader.GetOrdinal("PhoneNumber")),
+                                DepartmentName = reader.IsDBNull(reader.GetOrdinal("DepartmentName")) ? (string?)null : reader.GetString(reader.GetOrdinal("DepartmentName")),
+                            };
+
+                            EmployeeList.Add(employeeList);
+                        }
+                    }
+                }
+            }
+
+            return EmployeeList;
+        }
+
+        public void UpdateEmployeeDepartment(string Id, string EmployeeId, int ManagerId, int DepartmentId)
+        {
+            using (SqlConnection connection = new SqlConnection(_context.Database.GetConnectionString()))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("UpdateEmployeeDepartment", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // Pass the parameters to the stored procedure
+                    command.Parameters.AddWithValue("@Id", Id);
+                    command.Parameters.AddWithValue("@EmployeeId", EmployeeId);
+                    command.Parameters.AddWithValue("@ManagerId", ManagerId);
+                    command.Parameters.AddWithValue("@DepartmentId", DepartmentId);
+
+                    try
+                    {
+                        // Execute the stored procedure
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle exceptions, log errors, or throw further if needed
+                        Console.WriteLine($"Error RejectInsuranceRegistration for employee: {ex.Message}");
+                        throw;
+                    }
+                }
+            }
+        }
+
+        public IEnumerable<ForManagerModel> GetDepartments()
+        {
+            List<ForManagerModel> EmployeeList = new List<ForManagerModel>();
+
+            using (SqlConnection connection = new SqlConnection(_context.Database.GetConnectionString()))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("GetDepartments", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    // Pass the EmployeeID as a parameter
+                    //command.Parameters.AddWithValue("@Id", Id);
+                    //command.Parameters.AddWithValue("@IsManager", IsManager);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ForManagerModel employeeList = new ForManagerModel
+                            {
+                                DepartmentId = reader.GetInt32(reader.GetOrdinal("DepartmentId")),
+                                DepartmentName = reader.IsDBNull(reader.GetOrdinal("DepartmentName")) ? (string?)null : reader.GetString(reader.GetOrdinal("DepartmentName")),
+                            };
+
+                            EmployeeList.Add(employeeList);
+                        }
+                    }
+                }
+            }
+
+            return EmployeeList;
+        }
+
+        public IEnumerable<ForManagerModel> GetManagers()
+        {
+            List<ForManagerModel> EmployeeList = new List<ForManagerModel>();
+
+            using (SqlConnection connection = new SqlConnection(_context.Database.GetConnectionString()))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("GetManagers", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    // Pass the EmployeeID as a parameter
+                    //command.Parameters.AddWithValue("@Id", Id);
+                    //command.Parameters.AddWithValue("@IsManager", IsManager);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ForManagerModel employeeList = new ForManagerModel
+                            {
+                                FirstName = reader.IsDBNull(reader.GetOrdinal("FirstName")) ? (string?)null : reader.GetString(reader.GetOrdinal("FirstName")),
+                                LastName = reader.IsDBNull(reader.GetOrdinal("LastName")) ? (string?)null : reader.GetString(reader.GetOrdinal("LastName")),
+                            };
+
+                            EmployeeList.Add(employeeList);
+                        }
+                    }
+                }
+            }
+
+            return EmployeeList;
+        }
     }
 }

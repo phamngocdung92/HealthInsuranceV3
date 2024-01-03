@@ -1,12 +1,13 @@
-﻿@model IEnumerable<HealthInsuranceV3.Models.ForManagerModel>
+﻿@using HealthInsuranceV3.Models;
+@model DepartmentAndManager
 
 @{
     Layout = "_Layout";
-    ViewData["title"] = "Check Employee Registration";
+    ViewData["title"] = "New Employee";
 }
 <head>
     <meta charset="utf-8">
-    <title>Insurance Detail</title>
+    <title>List Insurance</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -49,74 +50,79 @@
 </head>
 <body>
     <!-- Service Start -->
-    @if (Model.Any())
-    {
-        var firstItem = Model.FirstOrDefault();
-        Console.WriteLine($"FirstName: {firstItem?.FirstName}, LastName: {firstItem?.LastName}");
-    
+
+
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <p class="d-inline-block border rounded-pill py-1 px-4"> </p>
-                    <h1>Registration of</h1>
-                    <h3>@firstItem.FirstName @firstItem.LastName</h3>
+                <p class="d-inline-block border rounded-pill py-1 px-4">List</p>
+                <h1>New Employee</h1>
             </div>
-                @if (TempData["SuccessMessage"] != null)
-                {
-                    <div class="alert alert-success" id="successMessage">
-                        @TempData["SuccessMessage"]
-                    </div>
-                    <meta http-equiv="refresh" content="3;url=@Url.Action("CheckEmpInsurance", "ForManager", new { area = "User", Id = firstItem.EmployeeId })" />
-                }
             <div class="row g-4">
-                @foreach (var item in Model)
+                @foreach (var item in Model.Data)
                 {
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item bg-light1 rounded h-100 p-5">
                             <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                                <i class="@GetIconClass(item.RegistrationStatus) text-primary fs-4"></i>
+                                <i class="fas fa-user-tie text-primary fs-4"></i>
                             </div>
-                            <h4 class="mb-3">PackageName: @item.PackageName</h4>
-                            <p class="mb-4">Status: @item.RegistrationStatus</p>
-                            <p class="mb-4">Registration Date: @item.RegistrationDate</p>
-                            <p class="mb-4">ApprovalDate: @item.ApprovalDate</p>
+                            <h4 class="mb-3">FirstName: @item.FirstName</h4>
+                            <p class="mb-4">LastName: @item.LastName</p>
+                            <p class="mb-4">Email: @item.Email</p>
+                            <p class="mb-4">PhoneNumber: @item.PhoneNumber</p>
+                            <div class="mb-3">
+                                <select class="form-select border-0">
+                                    @foreach (var department in Model.dataDepartment)
+                                    {
+                                        <option value="@department.DepartmentId">@department.DepartmentName</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select border-0">
+                                    @foreach (var manager in Model.dataManager)
+                                    {
+                                        <option value="@manager.ManagerId">@manager.FirstName @manager.LastName</option>
+                                    }
+                                </select>
+                            </div>
                             <button class="btn btn-primary w-100 py-3">
-                                    <a href="@Url.Action("ApproveInsurance", "ForManager", new {area = "User", RegistrationId = item.RegistrationId, EmployeeId = item.EmployeeId })"><i class="fas fa-thumbs-up text-primary me-3"></i>ApproveInsurance</a>
+                                <a href="@Url.Action("UpdateEmployeeDepartment", "ForManager", new {area = "User", Id = item.Id, EmployeeId = item.EmployeeId, ManagerId = item.ManagerId, Department = item.DepartmentId, IsManager = item.IsManager })"><i class="far fa-handshake text-primary me-3"></i>Assign Employee Department</a>
                             </button>
-                            <button class="btn btn-primary w-100 py-3">
-                                    <a href="@Url.Action("SelectReason", "ForManager", new {area = "User", EmployeeId = item.EmployeeId, RegistrationId = item.RegistrationId })"><i class="fas fa-thumbs-down text-danger me-3"></i>RejectInsurance</a>
-                            </button>
+
                         </div>
                     </div>
                 }
             </div>
         </div>
     </div>
-    }
+
+
     <!-- Service End -->
 
 </body>
-<script>
+@* <script>
     @functions {
-        string GetIconClass(string IconText)
+        string GetIconClass(string IconText)<i class="fas fa-search"></i>
         {
             switch (IconText)
             {
-                case "Pending":
-                    return "far fa-comments";
-                case "Approved":
-                    return "far fa-thumbs-up";
-                case "Rejected":
-                    return "far fa-thumbs-down";
+                case "IconText1":
+                    return "fas fa-heartbeat";
+                case "IconText2":
+                    return "fas fa-tooth";
+                case "IconText3":
+                    return "fas fa-heart";
+                case "IconText4":
+                    return "fas fa-wheelchair";
+                case "IconText5":
+                    return "fas fa-poo";
+                case "IconText6":
+                    return "fas fa-graduation-cap";
                 // Add more cases for other categories as needed
                 default:
-                    return "fa fa-question"; // Default icon for unknown categories<i class="fas fa-thumbs-down"></i>
+                    return "fa fa-question"; // Default icon for unknown categories<i class="fas fa-heartbeat"></i>
             }
         }
     }
-</script>
-<script>
-    setTimeout(function () {
-        document.getElementById("successMessage").style.display = "none";
-    }, 3000);
-</script>
+</script> *@
