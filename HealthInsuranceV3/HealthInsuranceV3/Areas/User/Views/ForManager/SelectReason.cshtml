@@ -1,0 +1,115 @@
+﻿@using HealthInsuranceV3.Models;
+@model SelectReasonModel
+
+@{
+    Layout = "_Layout";
+    ViewData["title"] = "Reject Reason";
+}
+<head>
+    <meta charset="utf-8">
+    <title>Insurance Detail</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    @* <link href="img/favicon.ico" rel="icon"> *@
+    <link href="../wwwroot/favicon.ico" rel="icon">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HealthInsuranceV3.styles.css" asp-append-version="true" />
+    <!-- Loading third party fonts -->
+    @* 	<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700|" rel="stylesheet" type="text/css"> *@
+    <link href="~/fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/fonts/lineo-icon/style.css" rel="stylesheet" type="text/css">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Loading main css file -->
+    <link rel="stylesheet" href="~/css/style.css"><!-- Libraries Stylesheet -->
+    <link href="~/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="~/css/style.css" rel="stylesheet">
+    <style>
+        .bg-light1 {
+            background-color: #ccdfff
+        }
+    </style>
+</head>
+<body>
+    <!-- Service Start -->
+    @if (Model.Data.Any())
+    {
+        var firstItem = Model.Data.FirstOrDefault();
+        var secondItem = Model.UserId;
+        Console.WriteLine($"FirstName: {firstItem?.FirstName}, LastName: {firstItem?.LastName}, Id: {secondItem}");
+
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <p class="d-inline-block border rounded-pill py-1 px-4"> </p>
+                    <h1>Reject Registration of</h1>
+                    <h3>@firstItem.FirstName @firstItem.LastName</h3>
+                </div>
+                <div class="row g-4">
+
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="service-item bg-light1 rounded h-100 p-5">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                                <i class="@GetIconClass(firstItem.RegistrationStatus) text-primary fs-4"></i>
+                                </div>
+                            <h4 class="mb-3">PackageName: @firstItem.PackageName</h4>
+                            <p class="mb-4">Registration Date: @firstItem.RegistrationDate</p>
+                                <select>
+                                    @foreach (var reason in Model.Data)
+                                    {
+                                        <option value="@reason.RejectionReasonId">@reason.ReasonText</option>
+                                    }
+                                </select>
+                                <button class="btn btn-primary w-100 py-3">
+                                <a href="@Url.Action("RejectInsuranceRegistration", "ForManager", new {area = "User", RegistrationId = firstItem.RegistrationId, EmployeeId = firstItem.EmployeeId, RejectionReasonId = firstItem.RejectionReasonId })"><i class="fas fa-thumbs-up text-primary me-3"></i>Reject Registration</a>
+                                </button>
+                                <button class="btn btn-primary w-100 py-3">
+                                    <a href="@Url.Action("CheckEmpInsurance", "ForManager", new {area = "User", Id = Model.UserId })"><i class="fas fa-thumbs-down text-danger me-3"></i>Cancel Reject</a>
+                                </button>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    <!-- Service End -->
+
+</body>
+<script>
+    @functions {
+        string GetIconClass(string IconText)
+        {
+            switch (IconText)
+            {
+                case "Pending":
+                    return "far fa-comments";
+                case "Approved":
+                    return "far fa-thumbs-up";
+                case "Rejected":
+                    return "far fa-thumbs-down";
+                // Add more cases for other categories as needed
+                default:
+                    return "fa fa-question"; // Default icon for unknown categories<i class="fas fa-thumbs-down"></i>
+            }
+        }
+    }
+</script>

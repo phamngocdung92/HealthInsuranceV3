@@ -1,0 +1,13 @@
+﻿using HealthInsuranceV3.Models;
+
+namespace HealthInsuranceV3.Areas.User.Repositories.ForManagerRepository
+{
+    public interface IForManagerRepository
+    {
+        IEnumerable<ForManagerModel> GetEmployeeList(string Id, bool IsManager);
+        IEnumerable<ForManagerModel> CheckEmpInsurance(string Id);
+        void ApproveInsurance(int RegistrationId, string EmployeeId);
+        IEnumerable<ForManagerModel> GetRejectionReasons();
+        void RejectInsuranceRegistration(int RegistrationId, string EmployeeId, int RejectionReasonId);
+    }
+}
