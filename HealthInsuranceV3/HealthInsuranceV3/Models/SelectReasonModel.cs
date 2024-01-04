@@ -5,5 +5,6 @@
         public string UserId { get; set; }
         public int RegistrationId { get; set; }
         public IEnumerable<ForManagerModel> Data { get; set; }
+        public IEnumerable<ForManagerModel> empData { get; set; }
     }
 }

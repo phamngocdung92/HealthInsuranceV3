@@ -70,8 +70,9 @@
                             <p class="mb-4">LastName: @item.LastName</p>
                             <p class="mb-4">Email: @item.Email</p>
                             <p class="mb-4">PhoneNumber: @item.PhoneNumber</p>
+                            <form method="post" action="@Url.Action("UpdateEmployeeDepartment", "ForManager", new {area = "User", Id = item.Id, EmployeeId = item.Id, ManagerId = item.ManagerId, Department = item.DepartmentId, IsManager = item.IsManager })">
                             <div class="mb-3">
-                                <select class="form-select border-0">
+                                <select name="DepartmentId" class="form-select border-0">
                                     @foreach (var department in Model.dataDepartment)
                                     {
                                         <option value="@department.DepartmentId">@department.DepartmentName</option>
@@ -79,17 +80,17 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <select class="form-select border-0">
+                                <select name="EmployeeId" class="form-select border-0">
                                     @foreach (var manager in Model.dataManager)
                                     {
-                                        <option value="@manager.ManagerId">@manager.FirstName @manager.LastName</option>
+                                        <option value="@manager.EmployeeId">@manager.FirstName @manager.LastName</option>
                                     }
                                 </select>
                             </div>
-                            <button class="btn btn-primary w-100 py-3">
-                                <a href="@Url.Action("UpdateEmployeeDepartment", "ForManager", new {area = "User", Id = item.Id, EmployeeId = item.EmployeeId, ManagerId = item.ManagerId, Department = item.DepartmentId, IsManager = item.IsManager })"><i class="far fa-handshake text-primary me-3"></i>Assign Employee Department</a>
+                            <button type="submit" class="btn btn-primary w-100 py-3">
+                                    <i class="far fa-handshake text-primary me-3">Assign Employee Department</i>
                             </button>
-
+                            </form>
                         </div>
                     </div>
                 }

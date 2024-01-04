@@ -48,7 +48,7 @@ namespace HealthInsuranceV3.Areas.User.Controllers
             var data = _ForManagerService.GetRejectionReasons();
 
             var viewModel = new SelectReasonModel
-            {
+            {   empData = empData,
                 UserId = EmployeeId,
                 RegistrationId = RegistrationId,
                 Data = data
@@ -56,11 +56,14 @@ namespace HealthInsuranceV3.Areas.User.Controllers
 
             return View(viewModel);
         }
-        public IActionResult RejectInsuranceRegistration(int RegistrationId, string EmployeeId, int RejectionReasonId)
+        [HttpPost]
+        [ActionName("RejectInsuranceRegistration")]
+        public IActionResult RejectInsuranceRegistration(int RegistrationId, string EmployeeId, int ReasonId)
         {
-            _ForManagerService.RejectInsuranceRegistration(RegistrationId, EmployeeId, RejectionReasonId);
-            return RedirectToAction("RejectInsuranceRegistration", new { Id = EmployeeId });
+            _ForManagerService.RejectInsuranceRegistration(RegistrationId, EmployeeId, ReasonId);
+            return RedirectToAction("CheckEmpInsurance", new { Id = EmployeeId });
         }
+
         public IActionResult ForHR()
         {
             var Id = _userManager.GetUserId(User);
@@ -97,12 +100,13 @@ namespace HealthInsuranceV3.Areas.User.Controllers
 
         //    return View(viewModel);
         //}
-
-        public IActionResult UpdateEmployeeDepartment(string Id, string EmployeeId, int ManagerId, int DepartmentId, bool IsManager)
+        [HttpPost]
+        [ActionName("UpdateEmployeeDepartment")]
+        public IActionResult UpdateEmployeeDepartment(string Id, string EmployeeId, int DepartmentId, bool IsManager)
         {
             
             //var data = _ForManagerService.GetNewEmp(Id, IsManager);
-            _ForManagerService.UpdateEmployeeDepartment(Id, EmployeeId, ManagerId, DepartmentId);
+            _ForManagerService.UpdateEmployeeDepartment(Id, EmployeeId, DepartmentId);
             return RedirectToAction("ForHR");
         }
     }

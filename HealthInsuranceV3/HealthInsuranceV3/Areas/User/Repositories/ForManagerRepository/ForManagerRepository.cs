@@ -157,7 +157,7 @@ namespace HealthInsuranceV3.Areas.User.Repositories.ForManagerRepository
             return RejectionReasons;
         }
 
-        public void RejectInsuranceRegistration(int RegistrationId, string EmployeeId, int RejectionReasonId)
+        public void RejectInsuranceRegistration(int RegistrationId, string EmployeeId, int ReasonId)
         {
             using (SqlConnection connection = new SqlConnection(_context.Database.GetConnectionString()))
             {
@@ -170,7 +170,7 @@ namespace HealthInsuranceV3.Areas.User.Repositories.ForManagerRepository
                     // Pass the parameters to the stored procedure
                     command.Parameters.AddWithValue("@RegistrationId", RegistrationId);
                     command.Parameters.AddWithValue("@EmployeeId", EmployeeId);
-                    command.Parameters.AddWithValue("@RejectionReasonId", RejectionReasonId);
+                    command.Parameters.AddWithValue("@RejectionReasonId", ReasonId);
 
                     try
                     {
@@ -225,7 +225,7 @@ namespace HealthInsuranceV3.Areas.User.Repositories.ForManagerRepository
             return EmployeeList;
         }
 
-        public void UpdateEmployeeDepartment(string Id, string EmployeeId, int ManagerId, int DepartmentId)
+        public void UpdateEmployeeDepartment(string Id, string EmployeeId, int DepartmentId)
         {
             using (SqlConnection connection = new SqlConnection(_context.Database.GetConnectionString()))
             {
@@ -238,7 +238,6 @@ namespace HealthInsuranceV3.Areas.User.Repositories.ForManagerRepository
                     // Pass the parameters to the stored procedure
                     command.Parameters.AddWithValue("@Id", Id);
                     command.Parameters.AddWithValue("@EmployeeId", EmployeeId);
-                    command.Parameters.AddWithValue("@ManagerId", ManagerId);
                     command.Parameters.AddWithValue("@DepartmentId", DepartmentId);
 
                     try
@@ -313,6 +312,7 @@ namespace HealthInsuranceV3.Areas.User.Repositories.ForManagerRepository
                             {
                                 FirstName = reader.IsDBNull(reader.GetOrdinal("FirstName")) ? (string?)null : reader.GetString(reader.GetOrdinal("FirstName")),
                                 LastName = reader.IsDBNull(reader.GetOrdinal("LastName")) ? (string?)null : reader.GetString(reader.GetOrdinal("LastName")),
+                                EmployeeId = reader.GetString(reader.GetOrdinal("EmployeeId")),
                             };
 
                             EmployeeList.Add(employeeList);

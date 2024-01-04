@@ -10,9 +10,9 @@ namespace HealthInsuranceV3.Areas.User.Services.ForManagerService
         IEnumerable<ForManagerModel> CheckEmpInsurance(string Id);
         void ApproveInsurance(int RegistrationId, string EmployeeId);
         IEnumerable<ForManagerModel> GetRejectionReasons();
-        void RejectInsuranceRegistration(int RegistrationId, string EmployeeId, int RejectionReasonId);
+        void RejectInsuranceRegistration(int RegistrationId, string EmployeeId, int ReasonId);
         IEnumerable<ForManagerModel> GetNewEmp(string Id, bool IsManager);
-        void UpdateEmployeeDepartment(string Id, string EmployeeId, int ManagerId, int DepartmentId);
+        void UpdateEmployeeDepartment(string Id, string EmployeeId, int DepartmentId);
         IEnumerable<ForManagerModel> GetDepartments();
         IEnumerable<ForManagerModel> GetManagers();
     }

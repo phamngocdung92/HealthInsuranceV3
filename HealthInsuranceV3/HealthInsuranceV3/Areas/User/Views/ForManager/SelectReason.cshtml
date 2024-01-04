@@ -54,40 +54,54 @@
     {
         var firstItem = Model.Data.FirstOrDefault();
         var secondItem = Model.UserId;
-        Console.WriteLine($"FirstName: {firstItem?.FirstName}, LastName: {firstItem?.LastName}, Id: {secondItem}");
+        var thirdItem = Model.empData.FirstOrDefault();
+        Console.WriteLine($"FirstName: {thirdItem?.FirstName}, LastName: {thirdItem?.LastName}, Id: {secondItem}");
 
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <p class="d-inline-block border rounded-pill py-1 px-4"> </p>
+                    @* <p class="d-inline-block border rounded-pill py-1 px-4"> </p> *@
                     <h1>Reject Registration of</h1>
-                    <h3>@firstItem.FirstName @firstItem.LastName</h3>
+                    <h3>@thirdItem.FirstName @thirdItem.LastName</h3>
                 </div>
                 <div class="row g-4">
 
-                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="service-item bg-light1 rounded h-100 p-5">
-                                <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                                <i class="@GetIconClass(firstItem.RegistrationStatus) text-primary fs-4"></i>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item bg-light1 rounded h-100 p-5">
+                            <div class="d-inline-flex align-items-center mb-4">
+                                <div class="bg-white rounded-circle mr-2" style="width: 65px; height: 65px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="@GetIconClass(firstItem.RegistrationStatus) text-primary fs-4"></i>
                                 </div>
-                            <h4 class="mb-3">PackageName: @firstItem.PackageName</h4>
-                            <p class="mb-4">Registration Date: @firstItem.RegistrationDate</p>
-                            <div class="mb-3">
-                            <select class="form-select border-0" >
-                                    @foreach (var reason in Model.Data)
-                                    {
-                                        <option value="@reason.RejectionReasonId">@reason.ReasonText</option>
-                                    }
-                                </select>
+                                <div class="ml-2" style="margin-left: 10px;">
+                                    <div><h5>Please select reason</h5></div>
+                                </div>
                             </div>
+                            <h5 class="mb-3">PackageName: @thirdItem.PackageName</h5>
+                            <p class="mb-4">Registration Date: @thirdItem.RegistrationDate</p>
+                            <div>
+                                <form method="post" action="@Url.Action("RejectInsuranceRegistration", "ForManager", new { area = "User", RegistrationId = Model.RegistrationId, EmployeeId = Model.UserId })">
+                                    <div class="mb-3">
+                                        <select name="ReasonId" class="form-select border-0">
+                                            @foreach (var reason in Model.Data)
+                                            {
+                                                <option value="@reason.ReasonId">@reason.ReasonText</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn btn-primary w-100 py-3">
+                                            <i class="fas fa-thumbs-down text-danger me-3"> Reject Registration</i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="mb-3">
                                 <button class="btn btn-primary w-100 py-3">
-                                <a href="@Url.Action("RejectInsuranceRegistration", "ForManager", new {area = "User", RegistrationId = firstItem.RegistrationId, EmployeeId = firstItem.EmployeeId, RejectionReasonId = firstItem.RejectionReasonId })"><i class="fas fa-thumbs-up text-primary me-3"></i>Reject Registration</a>
-                                </button>
-                                <button class="btn btn-primary w-100 py-3">
-                                    <a href="@Url.Action("CheckEmpInsurance", "ForManager", new {area = "User", Id = Model.UserId })"><i class="fas fa-thumbs-down text-danger me-3"></i>Cancel Reject</a>
+                                    <a href="@Url.Action("CheckEmpInsurance", "ForManager", new {area = "User", Id = Model.UserId })"><i class="fas fa-thumbs-up text-primary me-3"> Cancel Reject</i></a>
                                 </button>
                             </div>
                         </div>
+                    </div>
 
                 </div>
             </div>
