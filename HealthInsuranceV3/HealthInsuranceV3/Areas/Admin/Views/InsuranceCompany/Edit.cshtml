@@ -1,5 +1,37 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model HealthInsuranceV3.Entities.InsuranceCompany
+<div id="page-wrapper">
+    <div class="main-page">
+        <h4>Edit Insurance Company</h4>
+        <div class="col-12">
+            <div class="col-md-9">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="CompanyId" />
+                    <div class="form-group">
+                        <label for="CompanyName">Company Name</label>
+                        <input asp-for="CompanyName" class="form-control" />
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="EstablishedYear">Established Year</label>
+                        <input asp-for="EstablishedYear" type="date" class="form-control" />
+                        <span asp-validation-for="EstablishedYear" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="ContactInfo">Contact Info</label>
+                        <input asp-for="ContactInfo" class="form-control" />
+                        <span asp-validation-for="ContactInfo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Address">Address</label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

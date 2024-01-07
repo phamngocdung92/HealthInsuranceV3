@@ -1,0 +1,17 @@
+﻿@model HealthInsuranceV3.Entities.Insurance
+
+<div id="page-wrapper">
+    <div class="main-page">
+        <h4>Delete Insurance</h4>
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="InsuranceId" />
+
+            <p>Are you sure you want to delete this insurance?</p>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a asp-action="Index">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

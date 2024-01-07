@@ -1,5 +1,37 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<HealthInsuranceV3.Entities.Insurance>
+
+<div id="page-wrapper">
+    <div class="main-page">
+        <h4>List of Insurances</h4>
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Insurance Name</th>
+                    @* <th scope="col">Company</th> *@
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var i = 0;
+                }
+                @foreach (var insurance in Model)
+                {
+                    i++;
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@insurance.InsuranceName</td>
+                        @* <td>@insurance.Company?.CompanyName</td> *@
+                        <td>@insurance.Description</td>
+                        <td>
+                            <a asp-action="Edit" asp-controller="Insurance" asp-route-id="@insurance.InsuranceId">Edit</a> |
+                            <a asp-action="Delete" asp-controller="Insurance" asp-route-id="@insurance.InsuranceId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,5 +1,37 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model HealthInsuranceV3.Entities.InsurancePackage
+
+<div id="page-wrapper">
+    <div class="main-page">
+        <h4>Edit Insurance Package</h4>
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PackageId" />
+
+            <div class="form-group">
+                <label asp-for="PackageName"></label>
+                <input asp-for="PackageName" class="form-control" />
+                <span asp-validation-for="PackageName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CoverageDetails"></label>
+                <input asp-for="CoverageDetails" class="form-control" />
+                <span asp-validation-for="CoverageDetails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PolicyTermInDay"></label>
+                <input asp-for="PolicyTermInDay" class="form-control" />
+                <span asp-validation-for="PolicyTermInDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

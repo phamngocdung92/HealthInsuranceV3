@@ -1,5 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model HealthInsuranceV3.Entities.Insurance
+
+<div id="page-wrapper">
+    <div class="main-page">
+        <h4>Create Insurance</h4>
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="InsuranceName"></label>
+                <input asp-for="InsuranceName" class="form-control" />
+                <span asp-validation-for="InsuranceName" class="text-danger"></span>
+            </div>
+
+@*             <div class="form-group">
+                <label asp-for="CompanyId"></label>
+                <select asp-for="CompanyId" asp-items="@Model.Company.CompanyName" class="form-control">
+                    <option value="">-- Select a Company --</option>
+                </select>
+                <span asp-validation-for="CompanyId" class="text-danger"></span>
+            </div> *@
+
+            <div class="form-group">
+                <label asp-for="IconText"></label>
+                <input asp-for="IconText" class="form-control" />
+                <span asp-validation-for="IconText" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create Insurance</button>
+            </div>
+        </form>
+        <a asp-action="Index">Back to List Insurances</a>
+    </div>
+</div>
