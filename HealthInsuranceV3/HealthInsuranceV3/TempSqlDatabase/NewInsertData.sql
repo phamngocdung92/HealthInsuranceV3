@@ -39,4 +39,13 @@ INSERT INTO InsurancePackage (InsuranceId, PackageName, CoverageDetails, PolicyT
 (6, 'Gangster for life', 'Coverage for life events and your homies', 730, 750.00, 1),
 (7, 'Homework 24 Seven', 'Coverage for lazy student and failed the exam', 180, 75.00, 1);
 
-
+-- Insert Roles
+INSERT INTO AspNetRoles (Id, Name, NormalizedName)
+VALUES
+    ('1', 'Admin', 'ADMIN'),
+    ('2', 'User', 'USER');
+-- Insert Role for user
+INSERT INTO AspNetUserRoles (UserId, RoleId)
+VALUES
+    ('5da890e7-9467-4718-ab27-23988815d83e', '1'),
+    ('a9042a5d-b07a-481e-a516-a9fda174cb62', '2');

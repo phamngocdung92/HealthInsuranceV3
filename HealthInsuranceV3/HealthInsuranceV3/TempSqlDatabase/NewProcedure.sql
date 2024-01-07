@@ -229,7 +229,6 @@ END;
 	BEGIN
 	    DECLARE @Status INT
 	
-	    -- Kiểm tra điều kiện để update DBStatus
 	    SELECT @Status = IR.DBStatus
 	    FROM InsuranceRegistration IR
 	    WHERE IR.RegistrationId = @RegistrationId
