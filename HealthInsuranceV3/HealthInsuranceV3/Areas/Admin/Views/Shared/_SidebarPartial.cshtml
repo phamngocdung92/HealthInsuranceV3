@@ -1,0 +1,132 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+
+<aside class="sidebar-left">
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button"
+                    class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target=".collapse"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <h1>
+                <a class="navbar-brand" href="index.html">
+                    <span class="fa fa-area-chart"></span> Insurance<span class="dashboard_text">Design dashboard</span>
+                </a>
+            </h1>
+        </div>
+        <div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+            <ul class="sidebar-menu">
+                <li class="header">Admin Web</li>
+                <li class="treeview">
+                    <a asp-action="Index" asp-controller="Home">
+                        <i class="fa fa-dashboard"></i> <span>Home</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-laptop"></i>
+                        <span>Employee</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a asp-action="Index" asp-controller="Employee"><i class="fa fa-angle-right"></i>List Employee</a>
+                        </li>
+                        @* <li>
+                            <a asp-action="Create" asp-controller="Employee"><i class="fa fa-angle-right"></i>Create Employee</a>
+                        </li> *@
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-laptop"></i>
+                        <span>Insurance Company</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a asp-action="Index" asp-controller="InsuranceCompany"><i class="fa fa-angle-right"></i>List Company</a>
+                        </li>
+                        <li>
+                            <a asp-action="Create" asp-controller="InsuranceCompany"><i class="fa fa-angle-right"></i>Add Company</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-laptop"></i>
+                        <span>Insurance</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a asp-action="Index" asp-controller="Insurance"><i class="fa fa-angle-right"></i>List Insurance</a>
+                        </li>
+                        <li>
+                            <a asp-action="Create" asp-controller="Insurance"><i class="fa fa-angle-right"></i>Add Insurance</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-laptop"></i>
+                        <span>Insurance Package</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a asp-action="Index" asp-controller="InsurancePackage"><i class="fa fa-angle-right"></i>List InsurancePackage</a>
+                        </li>
+                        <li>
+                            <a asp-action="Create" asp-controller="InsurancePackage"><i class="fa fa-angle-right"></i>Add InsurancePackage</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-laptop"></i>
+                        <span>Insurance Registration</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a asp-action="Index" asp-controller="InsuranceRegistration"><i class="fa fa-angle-right"></i>List InsuranceRegistration</a>
+                        </li>
+                        <li>
+                            <a asp-action="Create" asp-controller="InsuranceRegistration"><i class="fa fa-angle-right"></i>Add InsuranceRegistration</a>
+                        </li>
+                    </ul>
+                </li>
+
+                @* <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-laptop"></i>
+                        <span>Payment</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a asp-action="Index" asp-controller="Payment"><i class="fa fa-angle-right"></i>List Payment</a>
+                        </li>
+                        <li>
+                            <a asp-action="Create" asp-controller="Payment"><i class="fa fa-angle-right"></i>Add Payment</a>
+                        </li>
+                    </ul>
+                </li> *@
+
+                <!--- add user admin -->
+                <!--- add user admin -->
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+</aside>
