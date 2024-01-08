@@ -67,11 +67,11 @@
                             <h4 class="mb-3">@item.PackageName</h4>
                             <p class="mb-4">@item.CoverageDetails</p>
                             <p class="mb-4">Price: @item.Price $</p>
-                            <p class="mb-4">PolicyTerm: @item.PolicyTermInDay Days</p>
+                            <p class="mb-4">Policy Term: @item.PolicyTermInDay Days</p>
                             <p class="mb-4">From: @item.CompanyName</p>
-                            <p class="mb-4">EstablishedYear: @item.EstablishedYearFormatted</p>
+                            <p class="mb-4">Established Year: @item.EstablishedYearFormatted</p>
                             <p class="mb-4">Address: @item.Address</p>
-                            <p class="mb-4">ContactInfo: @item.ContactInfo</p>
+                            <p class="mb-4">Contact Info: @item.ContactInfo</p>
                             <a class="btn" href="@Url.Action("RegisterInsurance", "InsuranceDetail", new {area = "User", PackageId = item.PackageId, ViewBag.CurrentUserID })">
                                 <i class="fa fa-plus text-primary me-3"></i>Request
                             </a>

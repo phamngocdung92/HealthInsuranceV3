@@ -66,10 +66,10 @@
                             <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
                                 <i class="fas fa-user-tie text-primary fs-4"></i>
                             </div>
-                            <h4 class="mb-3">FirstName: @item.FirstName</h4>
-                            <p class="mb-4">LastName: @item.LastName</p>
+                            <h4 class="mb-3">First Name: @item.FirstName</h4>
+                            <p class="mb-4">Last Name: @item.LastName</p>
                             <p class="mb-4">Email: @item.Email</p>
-                            <p class="mb-4">PhoneNumber: @item.PhoneNumber</p>
+                            <p class="mb-4">Phone Number: @item.PhoneNumber</p>
                             <form method="post" action="@Url.Action("UpdateEmployeeDepartment", "ForManager", new {area = "User", Id = item.Id, EmployeeId = item.Id, ManagerId = item.ManagerId, Department = item.DepartmentId, IsManager = item.IsManager })">
                             <div class="mb-3">
                                 <select name="DepartmentId" class="form-select border-0">

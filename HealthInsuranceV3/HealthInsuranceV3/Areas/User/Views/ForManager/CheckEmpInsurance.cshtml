@@ -79,15 +79,15 @@
                             <h4 class="mb-3">PackageName: @item.PackageName</h4>
                             <p class="mb-4">Status: @item.RegistrationStatus</p>
                             <p class="mb-4">Registration Date: @item.RegistrationDate</p>
-                            <p class="mb-4">ApprovalDate: @item.ApprovalDate</p>
+                            <p class="mb-4">Approval Date: @item.ApprovalDate</p>
                             <div class="mb-3">
                                 <button class="btn btn-primary w-100 py-3">
-                                    <a href="@Url.Action("ApproveInsurance", "ForManager", new {area = "User", RegistrationId = item.RegistrationId, EmployeeId = item.EmployeeId })"><i class="fas fa-thumbs-up text-primary me-3"></i>ApproveInsurance</a>
+                                    <a href="@Url.Action("ApproveInsurance", "ForManager", new {area = "User", RegistrationId = item.RegistrationId, EmployeeId = item.EmployeeId })"><i class="fas fa-thumbs-up text-primary me-3"></i>Approve Insurance</a>
                                 </button>
                             </div>
                             <div class="mb-3">
                                 <button class="btn btn-primary w-100 py-3">
-                                    <a href="@Url.Action("SelectReason", "ForManager", new {area = "User", EmployeeId = item.EmployeeId, RegistrationId = item.RegistrationId })"><i class="fas fa-thumbs-down text-danger me-3"></i>RejectInsurance</a>
+                                    <a href="@Url.Action("SelectReason", "ForManager", new {area = "User", EmployeeId = item.EmployeeId, RegistrationId = item.RegistrationId })"><i class="fas fa-thumbs-down text-danger me-3"></i>Reject Insurance</a>
                                 </button>
                             </div>
                             
